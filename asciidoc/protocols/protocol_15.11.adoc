@@ -1,0 +1,65 @@
+= Protokoll Gruppe 20
+
+Treffen am 15.11.2021
+
+Ort:      BigBlueButton +
+Beginn:   14:50 Uhr +
+Ende:     16:30 Uhr
+
+__Schriftführer:__ 
+
+*Nächstes Treffen:* +
+22.11.2021, 14:50 Uhr, BigBlueButton
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Alex
+- Jesse
+- Jorinde
+- Hanif
+
+== Bemerkungen
+
+Die Arbeit am Projekt soll effizienter werden, d.h. mehr Absprache untereinander sowie bessere Arbeitsteilung.
+Dafür zum Beispiel auch GitHub Issues nutzen und auf Discord zusammen am Projekt arbeiten, vielleicht ist auch eine bessere Teilung der Packages möglich.
+time_recording soll genau gemessen werden.
+Da an ähnlichen Teilen des Projekts gearbeitet wurde, sollen andere Prozesse noch mit eingebunden werden.
+
+== Retrospektive des letzten Sprints
+
+Alle haben an ihren Prototypen gearbeitet, diese sind aber noch nicht voll lauffähig. 
+Die Entwicklerdokumentation wurde von Alex angefangen und von allen Klassendiagramme hinzugefügt.
+Die Testfälle sind noch zu vervollständigen, außerdem sollen z.B. noch Autoren und Version vermerkt werden.
+Bei Jesse fehlt noch das Sequenzdiagramm.
+
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#1 |Komponenten verteilen |closed |
+|#2 |Pflichtenheft überarbeiten kleinigkeiten |closed |
+|#3 |Pflichtenheft bearbeiten |closed |
+|===
+
+== Aktueller Stand
+
+Von den Prototypen sind die von Jorinde und Jesse lauffähig, die anderen beiden treten noch Fehler auf.
+Die Entwicklerdokumentation ist geschrieben, ist aber noch nicht vollständig, außerdem sollen teilweise Verbesserungen gemacht werden.
+
+== Planung des nächsten Sprints
+
+- weitere Implementierungen 
+- dafür am besten parallel jUnit Tests oder Mockito
+- weiterhin Entwicklerdokumentation schreiben
+
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#4 |Präsentation |open |
+|#5 |Testplan |open |
+|#6 |Angebot bearbeiten |open |
+|#7 |Prototyp zum Laufen bringen |open |
+|#8 |Öfen und Mitarbeiter |open |
+|#9 |Bestellung |open |
+|#10 |developement documentation |open |
+|===

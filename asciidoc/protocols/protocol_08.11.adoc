@@ -1,0 +1,42 @@
+= Protokoll Gruppe 20
+
+Treffen am 08.11.2021
+
+Ort:      Ort +
+Beginn:   14:50 Uhr +
+Ende:     16:00 Uhr
+
+__Schriftführer:__ Alex
+
+*Nächstes Treffen:* +
+15.11.2021, 14:50 Uhr, BigBlueButton
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Alex 
+- Hanif 
+- Jorinde
+
+== Bemerkungen
+Jesse fehlt zum Meeting. (entschuldigt)
+
+Es wurde über das überarbeitete Pflichtenheft gesprochen. Zusätzlich zur Abschlusspräsentation kommt eine Zwischenpräsentation dazu. Dabei werden die bis dahin fertigen
+Aufgaben vorgestellt. Dabei werden 10min die Fortschritte mit Folien vorgestellt und weitere 10min der Prototyp vorgestellt. Dies geschieht vor unserem Tutor und 
+einem weiteren Tutoren aus einer anderen Gruppe. Dazu kommt eine weitere Gruppe (19) dazu. Es werden insgesamt 2 Zwischenpräsentationen geben, von beiden Gruppe jeweils
+eine. Der Termin wurde noch nicht bestätigt (wahrscheinlich Anfang Dezember).
+
+== Retrospektive des letzten Sprints
+Das Pflichtenheft ist nun in einem akzeptablen Zustand.
+
+== Aktueller Stand
+Nur Jorinde hatten einen funktionierenden Prototypen für ihre Komponente programmiert. Es fehlen allerdings noch Kleinigkeiten. Hanif und Alex haben noch nicht an ihren
+Komponenten angefangen.
+
+== Planung des nächsten Sprints
+Meilenstein!
+
+* Fertigstellung des "developer_documentation.adoc"!
+* Fertigstellung der einzelnen Anwendungsprototypen der Gruppenmitglieder.
+* Verfeinerung der Akezptanztestfälle (_Template_)
+

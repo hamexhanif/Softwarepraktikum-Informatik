@@ -1,0 +1,114 @@
+= Cross-Testing Feedback
+
+__Durchführende Gruppe:__ Gruppe 20
+
+__Anwendung von Gruppe:__ Gruppe 19
+
+== Getestetes System
+Welche Aufgabe/Problemstellung löst die Anwendung.
+Die Software soll die Bestellung vor Ort und die telefonische Bestellung der Filiale "Pizza-Service Papa Pizza" lösen. Dabei ist besonders darauf zu achten,
+dass Kunden die telefonisch bestellen möchten, sich mit ihrer Telefonnummer und ihrer dazugehörigen TAN ausweisen können.
+Die TAN erhält man nach erstmaliger Bestellung vor Ort in der Filiale. Nachdem sich ein Kunde bei der telefonischen Bestellung erfolgreich ausweisen konnte,
+kann dieser Kunde eine Bestellung tätigen, mit der Rechnung bekommt dieser Kunde seine neue TAN, die alte TAN wird bei diesem Vorgang verbraucht.
+
+Weitere Aufgabenstellungen sind:
+
+* Kunden bekommen ein Gratisgetränk, wenn sie über ein Bestellwert von 30€ kommen
+* eine Pizza wird in einem Ofen genau fünf Minuten gebacken
+* vierteljährig sollen die benötigten Anzahlen für Bäcker und Öfen bearbeitet werden können
+* wenn alle Öfen belegt sind, soll die nächste Bestellung zum nächstmöglichen Zeitpunkt eingeplant werden, dabei soll auch dem Kunden die vorraussichtliche Lieferungszeit bekannt gegeben werden
+* Lieferboten fahren alle 15 min und können nur die drei vorangegangenen Back-Takte mitnehmen
+* es soll Essgarnituren vergeben werden können, diese werden gegen eine Kaution von 15€ ausgegeben, diese müssen innerhalb der nächsten vier Wochen zurückgebracht werden, ansonsten verfällt die Kaution und gilt als Kaufpreis
+* Kundenbearbeitung (Hinzufügen/ Entfernen/ Bearbeitung/ TAN-Änderungen)
+* Angestelltenbearbeitung (Hinzufügen/ Entfernen/ Bearbeitung/ Rollenanpassungen)
+* Inventarbearbeitung (Hinzufügen/ Entfernen/ Bearbeitung)
+
+
+== Fehler-Report
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| http://localhost:8080/analytics | / | Der Tab hat den Namen "Angestellten Übersicht" | /
+| http://localhost:8080/customerVerification? | eingeloggt als cashier1 +
+Paramter: TelNr. und TAN von "Yorm the Giant" aus dem Terminal, genauso bei "Dragonslayer Armour"|  Error, wenn man versucht die Daten zu prüfen | Whitelabel-Error Page
+| http://localhost:8080/emplMgmt/edit/9?# | (Nutzername: oldcashier2, Nachname: Wahnsinn, Vorname: Rainer (so gelassen))passwort: 123, passwort wiederholen: 123, Rolle: Koch| Nach confirmation kommt error | Whitelabel Error Page
+| http://localhost:8080/emplMgmt/edit/7? | (Nutzername: driver2 etc.), Rolle: Koch | Dem Angestellten wird die Rolle Chef gegeben, obwohl er ein Koch sein soll | Rolle: Chef
+| http://localhost:8080/order/details/ | / | Bei Bestellung, die abgeholt werden soll wird auch ein Fahrer angezeigt in den Details | /
+| http://localhost:8080/cstmrMgmt | order mit dishset erstellt und ausgeliefert | bei dem Kunden wird in der Tabelle kein dishset angezeigt | /
+| http://localhost:8080/employeeManagement | Nachname: 4610 Vorname: 8750913	| man kan Employees mit Namen erstellen, die aus Zahlen bestehen | /
+| http://localhost:8080/analytics | / | Die Anzahl der angeschlossenen Bestellungen stimmt manchmal nicht mit der Anzahl der angezeigten abgeschlossenen Bestellungen überein (Anzahl erhöht sich wenn man die dishsets vom "dishset guy" zurückgibt) | /
+| http://localhost:8080/employeeManagement | Chef löschen | Man kann selbst als Boss keinen Chef löschen | Whitelabel Error Page
+| http://localhost:8080/order oder
+http://localhost:8080/analytics
+| eingeloggt als "boss", Passwort: 123 | Error wenn man sich die Bestellungen oder analytics anschauen will, wenn bestimmte Angestellte gelöscht hat | Whitelabel Error Page
+| http://localhost:8080/analytics | eingeloggt als boss, "Giant The Yorm" gelöscht | wenn man einen Kunden löscht, der schon Bestellungen getätigt hat, dann werden diese Bestellungen in der Bestellungsübersicht nicht mehr angezeigt und bei analytics werden sie Kundendaten ausgespart und bei details als null angegeben | Fehlerhafte Bestellungsdaten
+|http://localhost:8080/inventory | eingeloggt als boss | Wenn man versucht Ofen 1, 2 oder 3 zu löschen passiert nichts(da diese Pizzen in der Warteschlange haben), wenn man dann Ofen 4 und 5 löscht und anschließend einen neuen Ofen hizufügt, dann heißt dieser Ofen 6|
+|http://localhost:8080/order |eingeloggt als boss, ein kunde wurde verifiziert| wenn man einen Kunden verifiziert hat, dann kann man bevor man die Bestellung abgeschlossen hat auf einen anderen Tab in der Navigationsleiste gehen (z.B. Inventar) und die Bestellung wird automatisch hinzugefügt |
+|http://localhost:8080/analytics | eingeloggt als boss | [UC0440] AverageTimesGraph nicht vorhanden | / 
+|http://localhost:8080/kitchen | eingeloggt als boss | [UC0630] Es gibt kein "order" Button der weitere Informationen liefert (und Rechtschreibfehler Description -> "datails abaout" )| /
+|http://localhost:8080/order/details/ | eingeloggt als boss oder cashier1 | [UC0740] es gibt kein "close" Button | /
+|http://localhost:8080/customerVerification? | eingeloggt als boss oder cashier1 | [UC0810] wenn eine falsche TAN oder falsche Telefonnummer eingegeben wird -> error sollte abgefangen werden | Whitelabel Error Page
+|http://localhost:8080/order/newOrder | eingeloggt als boss oder cashier1 | [UC0860] employee hat kein "delete" Button | /
+|http://localhost:8080/order/newOrder | eingeloggt als boss oder cashier1 | [UC0870] employee hat kein "cancel" Button | /
+|http://localhost:8080/order/details/ | eingeloggt als boss oder cashier1 | [UC0880] employee hat kein confirm-action-popup, weiterhin werden unter "details" keine Köche oder Fahrer zugeordnet (siehe UC0880.png). Außerdem wird die vorraussichtliche Lieferzeit nicht angezeigt | /
+|http://localhost:8080/cstmrMgmt/new? | Nachname: 4610 Vorname: 8750913 | man kann Kunden mit Namen erstellen, die aus Zahlen bestehen | /
+|===
+
+
+
+== Sonstiges
+=== Optik der Anwendung
+Sehr gute Umsetzung durch:
+
+* leicht zu lesende Tabellen
+* optische Anpassungen der Buttons (wichtige Buttons = blau, weniger wichtige Buttons = grau)
+
+=== Fehlende Features
+
+* vorraussichtliche Lieferzeit
+* UC 0430
+
+=== Interaktion mit der Anwendung (Usability)
+
+* Textfelder / Zahlenfelder / Checkboxes / Buttons / Links
+* farblich markierte Fehlermeldungen / Änderungsmeldungen
+* Nachfrage bei wichtigen Buttons (z.B. Nachfrage bei "Löschen")
+
+== Verbesserungsvorschläge
+
+* Manche Buttons auffälliger gestalten (z.B. im Reiter "Inventar" den Button "Hinzufügen" für neue Pizzen, Verbrauchsgüter etc.)
+* Entweder alles auf Deutsch oder auf Englisch machen
+* Eingabefelder:
+- Es sollten keine Zahlen oder Sonderzeichen bei Vorname oder Nachname möglich sein
+- ein Name fängt mit einem Großbuchstaben an
+- bei Adressen gehen auch Eingaben wie "h" o.Ä., die keinen Sinn machen
+* im Reiter "Inventar" bei "bearbeiten" von Öfen, das Nachfrage-Fenster zu klein ausgefallen
+* Kunde nicht löschbar machen, wenn er noch ein dishset abgeben muss, dessen Abgabedatum noch nicht überschritten ist
+* Datum einer Bestellung in der Übersicht anzeigen +
+- was bedeutet monatlich, jährlich? Genauen Zeitraum spezifizieren.
+* Layout: in den order/details bei Koch/in und Fahrer/in den Namen in der gleichen Zeile anzeigen lassen
+* Umsatz: +
+- Wo wird der Ofenpreis eingerechnet?
+- Wozu kann man den Ofenpreis ändern? Wenn man einen Ofen einmal gekauft hat, dann ändert sich der Preis doch nicht mehr?
+- Wird der Ofenpreis wieder abgezogen, sobald man ihn löscht
+- -> Grundproblem ist, das es keinen "Kontostand" o.Ä. gibt der angezeigt wird
+* neueste Bestellung am Ende der Liste bei /order, wenn die Liste sehr lang ist muss man bis nach ganz unten scrollen, um die Order zu finden und man hat keinen Überblick welche schon abgeschlossen und welche noch nicht
+* man kann die Rolle eines drivers ändern, bevor die Bestellung ausgeliefert ist und dann kann dieser nicht mehr auf ausgeliefert drücken, weil er als kassierer nicht mehr die rechte dazu hat
+* Actors = employee nicht immer korrekt, driver kann nicht immer was Koch kann oder andersherum
+* Bei Neuanlegung von Kunden: wenn Telefonnummer falsch eingegeben wird -> keine Fehlermeldung was falsch ist (einfügen von Fehlermeldung: "muss 6-stellig sein")
+
+
+* Krittelei:
+- wenn man eine Bestellung erstellt, und Abholung einstellt und anschließend aktualisiert, dann wird der PickupDiscount angezeigt, aber bei Lieferung/Abholung muss man nochmal auf Abholung drücken, bevor man auf Abschließen drückt
+- TAN Überprüfung: Eingabe "," als ungültiges Zeichen bei der TAN, Fehlermeldung: "Geben sie einen gültigen Wert ein. Der nächste gültige Wert ist 0 oder 1" macht bei Sonderzeichen keinen Sinn
+- Bei der TAN Überprüfung kann man in 1er Schritten hoch und runterzählen, das scheint mir bei TAN und Telefonnummer unnötig
+- bei Fahrzeugen macht Produktname im Tabellenkopf keinen Sinn mehr
+- Koch/in in den order/details zu Bäcker/in (analog bei Rollenvergabe bei Mitarbeiterregistrierung)
+- Es gibt 2 unterschiedliche dishsets, wie unterscheiden die sich?
+- Bei der Bestellung steht fragen sie den Kunden nach einem Freigetränk, selbst wenn der Rabatt schon auf ein Freigetränk angewendet wurde
+- aktualisieren Button bei /delivery
+- manchmal wird in den order/details nichts angezeigt bei Köchin:
+- die CustomerVerifikation hat ein paar Mal sehr lange geladen
+- ein Kunde sollte mehrere Bestellungen machen können (wenn Kunde neu verifiziert werden -> White Label error -> entweder abfangen oder neue Bestellung möglich)
+

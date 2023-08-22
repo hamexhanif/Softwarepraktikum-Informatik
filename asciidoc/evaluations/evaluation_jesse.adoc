@@ -1,0 +1,40 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2021/22
+
+**Von:** Jesse Pohl
+
+**Gruppe:** swt21w20
+
+== Was habe ich gelernt / was habe ich nicht gelernt?
+// Ausführung der positiven und negativen Erfahrungen, die im Softwarepraktikum gesammelt wurden
+- Programmierkenntnisse verbessert, vor allem in Java +
+- es gibt in 80% der Fälle jemanden online mit einem sehr ähnlichen Problem, also immer schön Google benutzen +
+- man sollte sich vor dem Programmieren ausmachen, ob man Englisch oder Deutsch für Bezeichnungen benutzt +
+- programmieren macht deutlich mehr Spaß als dokumentieren
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+// Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
+- ein Discord-Server ist ein sehr guter Anfang +
+- wir hatten ein bis zwei Meetings pro Woche, was gut für die Arbeitsaufteilung und die Absprache des aktuellen Stands war +
+- mehr spontane Treffen mit einem Teil der Gruppe & Code-together wären wahrscheinlich hilfreich +
+- je nach Aufteilung der Arbeit kann das Zusammenfügen der Programmteile aufwendig sein, wenn viele Personen daran beteiligt sind, 
+da wir eine Vierergruppe waren, hatten wir damit aber weniger Probleme
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+// Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
+- einige Klassen können ohne weiteren Aufwand gut verwendet werden +
+- Einlesezeit ist notwendig um die Zusammenhänge zu verstehen +
+- die Framework-Klassen passen natürlich nicht für jeden Anwendungsfall, heißt sie müssen teilweise 
+umgeschrieben, zweckentfremdet oder zugunsten selbst geschriebener außen vor gelassen werden
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+// Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+- die Hilfestunden waren sehr hilfreich und wurden bei uns aufgrund geringer Nachfrage nochmal extra angesprochen, 
+vielleicht könnten diese beim nächsten Mal noch mehr vermittelt werden, evtl am Anfang Umfrage über mögliche Termine für Studenten und Tutoren +
+- Videoshop war als Vorlage für das Projekt sehr hilfreich, Guestbook meiner Meinung nach weniger, daher vielleicht lieber mehrere Aufgaben in Vidoshop und Guestbook weglassen,
+da man dann auch etwas vertrauter mit einer spezifischen Programmstruktur ist und dieses Wissen auf das eigene Programm übertragen kann
+
+== Feedback für den Tutor
+// Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
+- unser Tutor war sehr sympathisch und hat die Aufgabenstellung gut vermittelt +
+- er war sehr verständnisvoll und entgegenkommend, trotzdessen wir etwas hinter den Zeitplan gerieten +
+- wir haben Tipps zur Prioritätenverteilung und zu Problemen erhalten +

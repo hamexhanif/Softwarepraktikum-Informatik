@@ -1,0 +1,52 @@
+= Protokoll Gruppe 20
+
+Treffen am 12.10.2021
+
+Ort:      BigBlueButton +
+Beginn:   16:40 Uhr +
+Ende:     18:10 Uhr
+
+__Schriftführer:__ Jesse
+
+*Nächstes Treffen:* +
+18.10.2021, 14:50 Uhr, BigBlueButton
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Alex
+- Jorinde
+- Hanif
+- Jesse
+
+== Bemerkungen
+Kennenlernen, Vorstellung der Aufgabenstellung, Erklärung des Praktikumsablaufs, 
+Scrum-Master ist Alex, Discord Server eingerichtet, Ajinkya ist aus der Gruppe ausgetreten,
+Festlegung eines wöchentlichen Termins für das Meeting
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|…     |…       |…      |…
+|===
+
+
+== Aktueller Stand
+Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
+Dokumenten.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|… |Guestbook-Erweiterung  |Hinzufügen von email-Adresse    |… |offen
+|… |Aufgabenstellung |Einlesen in die Aufgabe |…    |offen
+|===
