@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+    <head>
+    </head>
+    <body>
+    	<h2 th:text="#{order.saved}">Bestellung gespeichert</h2>
+
+    	<section layout:fragment="content">
+    		<a class="item" href="orderView.html" th:href="@{/orderView}" th:text="#{order.viewall}">Bestellungs�bersicht</a>
+    	</section>
+    	<section layout:fragment="content">
+    		<a class="item" href="order.html" th:href="@{/order}" th:text="#{products.back}">zur�ck</a>
+    	</section>
+
+    </body>
+</html>
+    
