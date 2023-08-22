@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+</head>
+<body>
+<header>
+	<h1 th:text="#{cart.title}">Warenkorb</h1>
+</header>
+<nav th:include="order :: order"></nav>
+        <section layout:fragment="content">
+            <div th:unless="${cart.empty}">
+				</br>
+
+                <table class="ui celled table">
+                	<thead>
+						<tr>
+							<th th:text="#{cart.productName}">Produkte</th>
+							<th th:text="#{cart.count}">Anzahl</th>
+							<th th:text="#{cart.price}">Preis
+							<th></th>
+						</tr>
+                	</thead>
+					<tbody th:remove="all-but-first">
+						<tr th:each="item : ${cart}">
+							<td th:text="${item.productName}">Produktname</td>
+							<td th:text="${item.quantity}">Anzahl</td>
+							<td th:text="${item.price}">Produktpreis</td>
+							<td>
+								<form th:method="post" th:action="@{/cart/delete/{id}(id=${item.id})}">
+									<button type="submit" th:text="#{cart.delete_bestelleinheit}" class="ui button">x</button>
+								</form>
+							</td>
+						</tr>
+						<tr>
+							<td>Beer</td>
+							<td>3</td>
+							<td>10 Euro</td>
+						</tr>
+                    </tbody>
+                </table>
+				</br>
+			</div>
+			<h3 div class="field" th:if="${cart.empty}" th:text="#{cart.empty}">keine Salate/Getränke</h3>
+
+			<div th:unless="${pizzaContainer.empty}" th:each="pizzaListe : ${pizzaContainer}">
+				<table class="ui celled table">
+					<thead>
+                		<tr>
+                			<th th:text="#{pizza.pizza}">Pizza</th>
+                			<th th:text="#{cart.price}">Preis</th>
+                		</tr>
+                		</thead>
+                		<tbody>
+                		<tr th:each="item : ${pizzaListe.getList()}">
+						<td th:text="${item.name}">Produktname</td>
+                		<td th:text="${item.price}">Produktpreis</td>
+                		</tr>
+					</tbody>
+				</table>
+				<div class="field">
+					<label class="label" th:text="#{cart.partial}">Zwischensumme</label>
+					<div style="display:inline" th:text="${pizzaListe.getSum()}">EUR</div>
+				</div>
+			</div>
+
+			<h3 div class="field" th:if="${pizzaContainer.empty}" th:text="#{pizzaContainer.empty}">keine Pizzen</h3>
+            <div class="field">
+				<h3 style="display:inline" th:text="#{cart.total}">Gesamtsumme</h3>
+				<h3 style="display:inline" th:text="${total}">EUR</h3>
+			</div>
+			<div class="field" th:unless="${pizzaContainer.empty && cart.empty}">
+				<form class="ui form" method="post" th:action="@{/leeren}">
+					<button type="submit" class="ui button" th:text="#{cart.leeren}"  onclick="if(!(confirm('Sind sie sicher, dass sie diese Bestellung verwerfen wollen?'))) return false">Korb leeren</button>
+				</form>
+			</div>
+			<div class="field" th:unless="${pizzaContainer.empty && cart.empty}">
+				<form class="ui form" method="post" th:action="@{/save}">
+					<div >
+						<label style="display:inline" th:text="#{cart.zustellung}">Zustellung</label>
+						<select name="zustellTyp" id="zustellTyp">
+							<option th:value="DELIVERY" th:text="#{cart.zustellung.lieferung}">
+							<option th:value="PICKUP" th:text="#{cart.zustellung.abholung}">
+						</select>
+					</div>
+					<div >
+						<label style="display:inline" th:text="#{cart.zahlung}">Zahlungsart</label>
+						<select name="zahlTyp" id="zahlTyp">
+							<option th:value="Cash" th:text="#{cart.zahlung.bar}">
+							<option th:value="CreditCard" th:text="#{cart.zahlung.karte}">
+						</select>
+						<div >
+							<label class="label" th:text="#{cart.zeit}">Wartezeit</label>
+							<div style="display:inline" th:text="${warteZeit}"></div>
+						</div>
+					</div>
+					<div style="display:inline">
+                    	<button style="display:inline" type="submit" class="ui button" th:text="#{cart.save}">Bestellung speichern</button>
+                    </div >
+				</form>
+			</div>
+			</br>
+		</section>
+    </body>
+</html>

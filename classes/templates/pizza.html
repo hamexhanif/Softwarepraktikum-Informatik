@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+</head>
+<body>
+<header>
+    <h1 th:text="#{pizza.title}">Titel</h1>
+</header>
+<nav th:include="order :: order"></nav><br>
+<section layout:fragment="content">
+    <!--<h3 th:text="#{pizza.neu.title}"></h3>-->
+    <div th:unless="${pizzaListe.empty}">
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="#{cart.productName}">Produkte</th>
+            <th th:text="#{cart.price}">Preis</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+        <tr th:each="item : ${pizzaListe.getList()}">
+            <td th:text="${item.name}">Produktname</td>
+            <td th:text="${item.price}">Produktpreis</td>
+            <td>
+                <form th:method="post" th:action="@{/pizza/delete/{id}(id=${item.id})}">
+                    <button type="submit" th:text="#{pizza.delete_zutat}" class="ui button">x</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Mozarella</td>
+            <td>1.60</td>
+        </tr>
+        </tbody>
+
+    </table>
+    </br>
+    </div>
+
+
+
+    <div class="field">
+        <div th:unless="${!pizzaListe.empty}" style="display:inline" class="label" th:text="#{pizza.defaultprice}">Summe</div>
+        <div th:unless="${pizzaListe.empty}" style="display:inline" class="label" th:text="#{pizza.total}">Summe</div>
+        <div style="display:inline" th:text="${{pizzaListe.getSum}}"></div>
+    </div>
+    </br>
+
+
+        <a style="display:inline" class="zutatenlink" href="ingredients.html" th:href="@{/ingredients}" th:text="#{pizza.ingredients}">Zutaten</a>
+
+    <form th:unless="${pizzaListe.empty}" style="display:inline" class="ui form" method="post" th:action="@{/cart}" >
+        <input style="display:inline" type="hidden" name="product" th:value="${pizzaListe}"/>
+        <button style="display:inline" type="submit" class="ui button" th:text="#{pizza.add}">Hinzufügen</button>
+    </form>
+</section>
+
+
+</body>
+</html>

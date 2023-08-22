@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html(title=#{angebot.title})}">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+</head>
+<body>
+<header>
+    <h1 th:text="#{angebot.titel}">Angebot</h1>
+</header>
+<section layout:fragment="content">
+    <nav th:include="navigation :: navigation"></nav>
+
+    <div class="cards" th:remove="all-but-first">
+        <div class="card" th:each="bestelleinheit : ${angebot}">
+            <div class="content">
+                <a class="header" th:href="@{/bestelleinheit/{id}(id=${bestelleinheit.id})}" th:text="${bestelleinheit.name}">Last Action Hero</a>
+            </div>
+            <div class="price">
+                <div class="description" th:text="${{bestelleinheit.price}}">9.99 €</div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <form class="ui form" role="form" th:object="${neueBestelleinheitForm}" th:action="@{/angebot}" method="post">
+
+        <h3 th:text="#{katalog.bestelleinheit.hinzufuegen}">Neue Bestelleinheit hinzufügen</h3>
+        <div class="error" th:if="${#fields.hasErrors('*')}">
+            <p>Einige Angaben sind nicht korrekt.</p>
+        </div>
+        <div th:if="${#fields.hasErrors('global')}">
+            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+        </div>
+        <div class="field">
+            <label th:text="#{katalog.name}">Name:</label>
+            <input type="text" id="name" name="name" th:field="*{name}" th:errorclass="fieldError" required="required"/><br/>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">Das Passwort darf nicht leer sein.</p>
+        </div>
+
+        <div class="field">
+            <label th:text="#{katalog.preis}">Preis:</label>
+            <input type="number" step="0.01" min="0.00" id="preis" name="preis" th:field="*{preis}" required="required"/> <br/>
+            <p th:if="${#fields.hasErrors('preis')}" th:errors="*{preis}" class="error">Das Passwort darf nicht leer sein.</p>
+        </div>
+        <div class="field">
+            <label th:text="#{katalog.art}">Art:</label>
+            <select name="bestellTyp" id="bestellTyp" th:field="*{bestellType}">
+                <option th:value="salat" th:text="#{angebot.bestellTyp.salat}">salat</option>
+                <option th:value="getraenk" th:text="#{angebot.bestellTyp.getraenk}">getraenk</option>
+                <option th:value="zutat" th:text="#{angebot.bestellTyp.zutat}">zutat</option>
+            </select>
+        </div>
+        <button type="submit" th:text="#{katalog.hinzufuegen}" class="ui button">Hinzufügen</button><br/>
+
+    </form>
+</section>
+</body>
+</html>

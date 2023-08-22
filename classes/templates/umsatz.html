@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+</head>
+<body>
+<header>
+
+    <h1 th:text="#{orderView.umsatzListe}">Umsatz</h1>
+</header>
+<nav th:include="navigation :: navigation"></nav>
+
+<section layout:fragment="content">
+
+    <div>
+
+        <table class="ui celled table" sec:authorize="hasAnyRole('BOSS')">
+            <thead>
+            <tr>
+                <th th:text="#{order.date}"> Datum </th>
+                <th th:text="#{orderView.umsatzListe}">Umsatz</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="date : ${umsatzListe.keySet()}">
+                <td th:text="${#temporals.format(date, 'dd.MM.yyyy')}"></td>
+                <td th:text="${umsatzListe.get(date)}"></td>
+
+
+            </tr>
+            </tbody>
+        </table>
+        </br>
+    </div>
+    <div>
+        <h3 style="display:inline" th:text="#{orderView.umsatz.total}">Gesamtumsatz:</h3>
+        <h4 style="display:inline" th:text="${totalUmsatz}">Preis</h4>
+
+    </div>
+    </br>
+</section>
+</body>
+</html>
