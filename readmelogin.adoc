@@ -1,0 +1,17 @@
+== Standard-logins:
+
+	Boss:		boss
+			123
+	
+	Lieferbote:	hans
+			123
+
+	Mitarbeiter:	dorothy
+			123
+
+	Bäcker:		manuel
+			123
+
+
+== TAN - Generierung:
+Ersichtlich im Reiter "Kundenübersicht" oder in der Konsole.
