@@ -1,0 +1,56 @@
+= Protokoll Gruppe 20
+
+Treffen am 22.11.2021
+
+Ort:      BigBlueButton +
+Beginn:   14:50 Uhr +
+Ende:     16:20 Uhr
+
+__Schriftführer:__Jesse 
+
+*Nächstes Treffen:* +
+06.12.2021, 14:50 Uhr, BigBlueButton
+
+__Teilnehmer:__
+
+
+- Alex
+- Hanif
+- Jesse
+- Jorinde
+
+== Bemerkungen
+Es wurde der Übungsraum nochmal angesprochen.
+Daraufhin steht ggf eine Einigung auf eine Verschiebung des gruppeninternen Treffens an, um die Teilnahme für alle zu ermöglichen.
+Nähere Informationen zur kommenden Präsentation wurden erfragt.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#6    |Angebot bearbeiten        |closed      |
+|#7    |Prototyp zum Laufen bringen |closed |
+|#10   |developement documentation |closed |
+|===
+
+
+== Aktueller Stand
+Die Prototypen von Alex und Hanif sind nun lauffähig.
+Die Entwicklerdokumentation steht soweit.
+Jesse und Jorinde arbeiten an ihren Prototypen weiter.
+Jorinde hat außerdem schon angefangen zu mergen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|… |… |… |… |…
+|… |… |… |… |…
+|===
+

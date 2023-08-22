@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+    </head>
+	<body>
+	<header>
+		<h1 th:text="#{pizzashop.order.title}">Bestellung</h1>
+	</header>
+    	<nav th:fragment="order">
+    		<div class="navigation">
+    			<a class="item" href="cart.html" th:href="@{/cart}"
+    			th:text="#{pizzashop.order.cart}">Warenkorb</a>
+    			<a class="item" href="pizza.html" th:href="@{/pizza}"
+    			th:text="#{pizzashop.order.addpizza}">Pizza</a>
+    			<a class="item" href="katalog.html" th:href="@{/getraenke}"
+    			th:text="#{pizzashop.order.adddrinks}">Produkt</a>
+    			<a class="item" href="katalog.html" th:href="@{/salat}"
+    			th:text="#{pizzashop.order.addsalads}">Produkt</a>
+				<a class="item" href="katalog.html" th:href="@{/essgarnituren}"
+				   th:text="#{pizzashop.order.addessgar}">Produkt</a>
+					<form class="logbutton" sec:authorize="isAuthenticated()" th:action="@{/order/abbruch}" method="post">
+           				<button type="submit" th:text="#{order.abbruch}" class="ui button"
+			 			onclick="if(!(confirm('Möchtest du die Bestellung abbrechen?'))) return false"></button>
+            		</form>
+    		</div>
+    	</nav>
+    	
+    </body>
+</html>    

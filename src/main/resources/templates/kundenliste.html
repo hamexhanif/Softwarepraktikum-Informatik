@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html(title=#{kundenliste.title})}">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+</head>
+<body>
+<header>
+    <h1 th:text="#{kunden.title}">Angebot</h1>
+</header>
+<nav th:include="navigation :: navigation"></nav>
+<div class="alert" role="alert" th:text="#{${erfolgreich}}" th:if="${erfolgreich}">
+</div>
+        <section layout:fragment="content">
+            <table th:unless="${kundenListe.empty}" class="ui celled table">
+                <thead>
+                <tr>
+                    <th th:text="#{kunde.vorname}">Vorname</th>
+                    <th th:text="#{kunde.nachname}">Nachname</th>
+                    <th th:text="#{kunde.adresse}">Adresse</th>
+                    <th th:text="#{kunde.telefon}">Telefonnummer</th>
+                    <th th:text="#{kunde.tan}">TAN</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                <tr th:each=" kunde : ${kundenListe}">
+                    <td th:text="${kunde.vorname}">Paul</td>
+                    <td th:text="${kunde.nachname}">Mustermann</td>
+                    <td th:text="${kunde.adresse}">Nöthnitzer Straße 46</td>
+                    <td th:text="${kunde.telefon}">0123456789</td>
+                    <td th:text="${kunde.tan}">123456</td>
+					<td>
+                    	<form sec:authorize="hasRole('BOSS')" th:method="post" th:action="@{/kundenliste/{id}/loeschen(id=${kunde.id})}" th:attr="data-kunde-id=${kunde.id}">
+							<button type="submit" th:text="#{kunde.loeschen}" class="ui button" onclick="if(!(confirm('Sind sie sicher, dass sie diesen Kunden entfernen wollen?'))) return false">x</button>
+						</form>
+					</td>		   
+                </tr>         
+                </tbody>
+            </table>
+            </br>
+        </section>
+    </body>
+</html>

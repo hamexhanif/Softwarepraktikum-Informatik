@@ -1,0 +1,52 @@
+= Protokoll Gruppe 20
+
+Treffen am 20.12.2021
+
+Ort:      BigBlueButton +
+Beginn:   14:50 Uhr +
+Ende:     15:50 Uhr
+
+__Schriftführer:__ Jesse
+
+*Nächstes Treffen:* +
+10.01.2022, 14:50 Uhr, BigBlueButton
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Alex
+- Hanif
+- Jesse
+- Jorinde
+
+== Bemerkungen
+
+Der Cross-Testing Bericht für die andere Gruppe wurde abgegeben, der für die eigene Gruppe wurde erhalten.
+Es gibt neben den Punkten im Cross-Testing Bericht noch weitere Bereiche (Muss-Kriterien) zu programmieren/vervollständigen: +
+- backen von Pizzen +
+- Lieferzeitberechnung +
+- Bäcker vollständig implementieren +
+- Zahlungsart auswählen +
+- Tests schreiben und mindestens auf 80% Testabdeckung in Sonarqube kommen + 
+Auf Wunsch besteht die Möglichkeit auf ein weiteres Meeting vor dem 10.01. zwischen dem 05.01. und 07.01. 2022
+
+== Retrospektive des letzten Sprints
+
+Alex und Jorinde haben sich um das Cross-Testing gekümmert und den Bericht dazu fertiggestellt.
+Hanif und Jesse haben währenddessen weiter am Programm gearbeitet, im Zentrum stand das Backen von Pizzen, 
+dies ist allerdings noch nicht fertig geworden, sodass weiter daran gearbeitet werden muss.
+
+
+== Aktueller Stand
+Es fehlen noch einige Muss-Kriterien, damit ist die Gruppe hinter dem derzeitig erwarteten Stand.
+Die GUI sollte ebenfalls verbessert werden, da sie sich noch im Ursprungszustand befindet.
+
+== Planung des nächsten Sprints
+
+Bis zum nächsten Treffen sollen möglichst alle Muss-Kriterien erfüllt sein, sodass das Programm 
+vollständig funktionsfähig ist.
+Es sollen weitere Tests für die 80% Test-Coverage geschrieben werden.
+Außerdem soll eine javadoc eingefügt werden, welche die Funktionsweise nichttrivialer Methoden sowie Klassen kurz erklärt/beschreibt.
+
+
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout.html}">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+</head>
+<body>
+<header>
+	<h1 th:text="#{warteliste.title}">Warteliste</h1>
+</header>
+<nav th:include="navigation :: navigation"></nav>
+<form action="#" th:action="@{/backen}" th:object="${backForm}" method="post">
+	<div class="alert" role="alert" th:text="#{${fail}}" th:if="${fail}"></div>
+	<div>
+		<select th:field="*{ofenId}">
+			<option th:each="ofeni : ${ofenlist}" th:value="${ofeni.getId()}" th:text="Ofen_ + ${ofeni.getId()}"></option>
+		</select>
+	</div>
+	<div>
+		<select th:field="*{pizzaId}">
+			<option th:each="pizza :${wartePizza}" th:value="${pizza.getId()}" th:text="${pizza.getId()}"></option>
+		</select>
+	</div>
+	<button type="submit" th:text="#{warteliste.backen}"></button>
+	</form>
+<br>
+	<section layout:fragemtn="content" th:each="pizza : ${wartePizza}">
+	<table th:unless="${warteliste.getWarteliste().empty}" class="ui celled table">
+		<thead>
+		<tr>
+			<th th:text="#{warteliste.pizza}">Zutaten</th>
+			<th th:text="#{warteliste.id}">OrderID</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td th:text="${pizza.getId()}"></td>
+			<td th:text="${warteliste.get(pizza)}"></td>
+		<tr th:each="zutat : ${pizza.getList()}">
+			<td th:text="${zutat.name}">Zutat</td>
+		<tr>
+		</tbody>
+	</table>
+	</section>	
+
+</body>
+</html>

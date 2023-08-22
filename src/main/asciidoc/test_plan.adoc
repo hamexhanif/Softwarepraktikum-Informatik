@@ -1,0 +1,141 @@
+= Test-Plan
+
+Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
+
+== Einführung
+Dieses Dokument legt fest, welche Funktionalitäten zu testen sind und wie diese Tests aussehen sollen.
+Für die Filiale "Pizza-Service Papa Pizza" soll ein Programm entwickelt werden. In diesem Dokument wird definiert:
+
+* Welche Test benötigt werden für das System
+
+* Wer für welchen Test verantwortlich ist
+
+== Aufbau der Testbezeichner
+
+ U_A_jo_001
+ 
+_Testart_Komponente_Ansprechpartner_Nummer_  
+
+* Testart: U - Unit Test, I - Integrationstest
+* Komponente: A-Angebot, B-Bestellung, P-Personal, F-Filiale, K-Kunde, S-System
+* Ansprechpartner: ha-Muhammad Hanif A F,  je-Jesse Pohl,  al-Alexander Jurkin,  jo-Jorinde Wellmer
+* Nummer: 3-stellig
+
+== Test Gegenstände
+[options="headers"]
+|===
+|Kürzel |Bereich            |Verantwortlicher
+|kvg    |Kundenverwaltung   |Alexander Jurkin
+|pvg    |Personalverwaltung |Muhammad Hanif A F
+|bsg    |Bestellung         |Jesse Pohl
+|avg    |Angebotsverwaltung |Jorinde Wellmer
+|rcg    |Rechnung           |
+|pza    |Pizza              |
+|ivr    |Inventar           |
+|===
+
+== Zu testende Funktionalitäten
+
+* kvg:
+- Kunden hinzufügen
+- Kunden entfernen
+- Kunden validieren
+
+
+* pvg:
+- Personal hinzufügen
+- Personal entfernen
+- Personal Rolle geben
+
+* bsg:
+- Bestellung-Zusammenstellung
+
+* avg:
+- Verwaltung von Bestelleinheiten (Zutaten, Salate, Getränke)
+- Hinzufügen von Bestelleinheiten
+- Entfernen von Bestelleinheiten
+- Bearbeiten von Bestelleinheiten
+
+* rcg:
+- neue TAN
+- Lieferung oder Abholung
+
+* pza:
+- Pizza backen
+
+* ivr:
+- Öfenanzahl bearbeiten
+- Umsatz einsehen
+
+
+
+== Nicht zu testende Funktionalitäten
+
+Die von externen Frameworks wie zum Beispiel Salespoint übernommenen Funktionen müssen nicht extra getestet werden.
+
+== Herangehensweise
+
+Klassen werden mit JUnit nach dem Bottom-Up Prinzip getestet.
+
+== Umgebungsvoraussetzungen
+* Wird spezielle Hardware benötigt?
+- Server: Zum Testen der Software
+* Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
+- 
+* Wird zusätzliche Software für das Testen benötigt?
+- JUnit 5 für Unit-Tests http://www.junit.org/
+- Mockito für entkoppelte Tests https://site.mockito.org/
+* Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
+- Da die Software nur innerhalb der Filiale laufen soll, übers Netzwerk
+
+== Testfälle und Verantwortlichkeit
+Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
+
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|<<AT0100>> |<<UC0100>>              |Ein Lieferbote ist eingeloggt              |Button wird geklickt       |Die entsprechende Bestellung wird von der Bestellungsliste gelöscht
+|<<AT0220>> |<<UC0220>> | Das System hat registrierte Filialenmitarbeiter. |Name, Vorname, Telefonnr., Adresse, | - Boolean True und kundenListe, die Kunden enthält
+|<<AT0360>> | <<UC0360>> |Der Boss ist eingeloggt. |Name, Vorname, Passwort, Rolle eines Mitarbeiters |
+- Mitarbeiter ist registriert, kann sich mit Passwort einloggen
+- er hat die entsprechende Rolle
+|<<AT0200>>  |<<UC0200>> |Das System hat registrierte Mitarbeiter. |Name und Passwort |
+- Wenn Passwort richtig, wird Mitarbeiter authentifiziert, sonst Abehnung
+ |<<AT0230>> |<<UC0230>> |Ein Filialenmitarbeiter ist eingeloggt und ein Kunde ist registriert. |Telefonnummer, TAN eines Kunden |
+-Bestellung wird mit Kunden verknüpft
+|<<AT0300>> |<<UC0300>>|Der Boss ist eingeloggt. Es muss mindestens eine Zutat im Inventar existieren.|Bestelleinheit und geänderter Preis|
+- Preis wird geändert
+|<<AT0310>> |<<UC0310>>|Der Boss ist eingeloggt.| Anzahl der Öffen, die hinzugefügt oder entfernt werden sollen | Anzahl der Öfen aktualisiert
+ |<<AT0240>> |<<UC0240>> |Das System hat registrierte Filialenmitarbeiter, der eingeloggt ist. Ein Kunde ist registriert | anderen Namen oder andere Adresse |
+- Name/ Adresse geändert 
+ |<<AT0210>> |<<UC0210>> |Das System hat registrierte Filialenmitarbeiter, der eingeloggt ist. Ein Kunde ist registriert und er wurde vom Filialenmitarbeiter verifiziert.|Bestelleinheit, die zur Bestellung hinzugefügt weren soll|
+- wenn noch nicht wird Bestellung erstellt und Bestelleinheit(en) werden hinzugefügt
+|<<AT0320>> |<<UC0320>>|Ein Boss ist eingeloggt|Mitarbeiter |Mitarbeiter wird aus Liste der Mitarbeiter entfernt
+
+|<<U_A_jo_001>>|Der Boss möchte einen Überblick über das Angebot bekommen und klickt den entsprechenden Tab in der Navigation |Der Boss ist eingeloggt.| Alle Bestelleinheiten, die im bestellKatalog sind werden angezeigt|
+|<<U_A_jo_002>>|Der Boss will den Preis eines Produktes ändern |Der Boss ist eingeloggt.Es gibt eine Bestelleinheit, diese wurde aus dem Angebot ausgewählt und ein neuer Preis wurde eingegeben. | Eine Bestelleinheit wurde aus dem Angebot ausgewählt und ein neuer Preis wurde eingegeben.| Der Preis des entsprechenden Produktes wurde geändert
+|<<U_A_jo_003>>|Der Boss will ein neues Produkt hinzufügen |Der Boss ist eingeloggt.| Name, Preis, BestellType des neuen Produkt| Produkt wird erstellt und zum bestellKatalog hinzugefügt, wenn eine Bestelleinheit mit dem gleichen Namen noch nicht existiert.
+|<<U_A_jo_004>>|Der Boss will ein Produkt löschen | Der Boss ist eingeloggt. Es wurde eine Bestelleinheit ausgewählt, das gelöscht werden soll. | Bestelleinheit | Die Bestelleinheit wird aus dem bestellKatalog entfernt
+|<<I_A_jo_101>>|Der Boss hat als einziger die Möglichkeit sich das Angebot anzuschauen und dieses zu bearbeiten. | Boss ist eingeloggt. | |Angebotseite wird angezeigt.
+|<<I_A_jo_102>>|Das Angebot(bestellKatalog) soll nicht leer sein. | Es existiert mindestens eine Bestelleinheit im BestellKatalog | | 
+|<<U_B_je_011>> |Ein Mitarbeiter will eine Bestellung erstellen. |Der Mitarbeiter ist angemeldet. |Der Mitarbeiter klickt auf Bestellung. |Seite für die Bestellungserstellung wird angezeigt.
+|<<U_B_je_005>> |Ein Lieferbote will die zu liefernden Bestellungen einsehen. |Der Lieferbote ist angemeldet. |Der Lieferbote klickt auf Bestellungsübersicht. |Bestellungsübersicht für Lieferungen wird angezeigt.
+|<<U_B_je_006>> |Ein Lieferbote wählt Bestellungen mit zu vielen Pizzen aus (10 als Maximalanzahl). |Bestellungen mit mehr als 10 Pizzen sind vorhanden. |Der Lieferbote wählt Bestellungen mit mehr als 10 Pizzen.|Fehlernachricht wird angezeigt.
+|<<U_B_je_007>> |Es sollen mehr Pizzen gebacken werden als freie Öfen existieren. |Bestellungen mit mehr Pizzen als Öfen werden gleichzeitig bearbeitet. |Mehr Pizzen als Öfen werden in Bestellungen aufgenommen. |Zusätzliche Wartezeit wird zur Bestellungsbearbeitungszeit hinzuaddiert.
+|<<U_B_je_008>> |Ein Mitarbeiter wählt eine Anzahl an Produkten aus, die der Bestellung hinzugefügt werden sollen. |Der Mitarbeiter ist angemeldet und befindet sich auf einer Seite zum Hinzufügen der Produkte. |Der Mitarbeiter wählt die gewünschte Anzahl zwischen 1 und 10 aus. |Das Produkt wird in dieser Anzahl zur Bestellung hinzugefügt.
+|<<U_P_ha_009>> |Lieferbote erstellen |Der Boss ist eingeloggt.| create(form.getName(), password, LIEFERBOTE_ROLE |neue Nutzer mit der Rolle "LIEFERBOTE"
+|<<U_P_ha_010>> |Mitarbeiter erstellen |Der Boss ist eingeloggt.| create(form.getName(), password, MITARBEITER_ROLE |neue Nutzer mit der Rolle "MITARBEITER"
+|<<U_P_ha_011>> |Bäcker erstellen |Der Boss ist eingeloggt.| create(form.getName(), password, BÄCKER_ROLE |neue Nutzer mit der Rolle "BÄCKER"
+|<<U_P_ha_012>> |Boss erstellen |Der Boss ist eingeloggt.| create(form.getName(), password, BOSS_ROLE |neue Nutzer mit der Rolle "BOSS"
+|<<U_P_ha_013>> |Personal entfernen|Der Boss ist eingeloggt.| deleteById(id) |der Nutzer mit der entsprechende ID wird von dem System gelöscht
+|<<U_K_al_014>> |Kunde hinzufügen| Der Boss oder Mitarbeiter ist eingeloggt.| Im Tab "Registrierung" wird der Vorname, Nachname, die Adresse und die Telefonnummer gespeichert| Ein Kunde mit seinen Daten wird ins System registriert. Anzeigbar im Tab "Kundenliste"
+|<<U_K_al_015>> |Kunde entfernen | Der Boss ist eingeloggt. | Im Tab "Kundenliste" drückt der Boss beim jeweiligen Kunden auf "Kunde entfernen". |Ein Kunde wird aus dem System entfernt
+|<<U_K_al_016>> |Gleiche Telefonnummer | Der Boss oder Mitarbeiter ist eingeloggt. | Der Boss oder Mitarbeiter registriert einen Kunden, der die gleiche Telfonnummer hat, wie jemand der im System schon gespeichert ist. | Fehlermeldung:"Diese Telefonnummer ist schon vergeben"
+|<<U_B_je_017>> |Ein Mitarbeiter will Zutaten zu einer Pizza hinzufügen. |Der Mitarbeiter ist eingeloggt und befindet sich auf der Pizza hinzufügen Seite. |Der Mitarbeiter wählt ZUtat hinzufügen & klickt dann den hinzufügen Button hinter der zugehörigen Zutat. | Die Zutat wird zur Pizza hinzugefügt.
+|<<U_B_je_018>> |Ein Mitarbeiter will eine Pizza zur Bestellung hinzufügen. | Es wurde zuvor mindestens eine Zutat zu der derzeitigen Pizza hinzugefügt. | Der Mitarbeiter klickt im Reiter Pizza hinzufügen auf "in den Warenkorb". | Die Pizza wird dem Warenkorb bzw der Bestellung hinzugefügt.
+|<<U_B_je_019>> |Ein Mitarbeiter will den derzeitigen Warenkorb leeren. |Es muss zuvor mindestens eine Pizza und/oder ein Salat oder Getränk zum Warenkorb hinzugefügt worden sein. |Der Mitarbeiter klickt auf den Button Warenkorb leeren. | Der Warenkorb ist wieder leer.  
+|<<U_B_je_020>> |Ein Mitarbeiter will die Lieferzeit für die Bestellung sehen. |Es muss ein Kunde verifiziert worden sein. |Der Mitarbeiter kann eine beliebige Anzahl an Produkten zum Warenkorb hinzufügen und diesen öffnen. | Die richtige Lieferzeit abhängig von der Anzahl der Pizzen sowie der Menge an Pizzen auf der Warteliste und in den Öfen wird angezeigt.
+|===
+
+

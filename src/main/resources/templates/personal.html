@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html(title=#{personal.title})}">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+    </head>
+    <body>
+    <header>
+        <h1 th:text="#{personal.title}">Angebot</h1>
+    </header>
+    	<nav th:include="navigation :: navigation"></nav>
+    <div class="alert" role="alert" th:text="#{${erfolgreich}}" th:if="${erfolgreich}">
+    </div>
+        <section layout:fragment="content">
+            <table th:unless="${personalList.empty}" class="ui celled table">
+                <thead>
+                <tr>
+                    <th th:text="#{personal.name}">Name</th>
+                    <th th:text="#{personal.job}">Job</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                <tr th:each=" personal : ${personalList}">
+                    <td th:text="${personal.userAccount.id}">Dorothy</td>
+                    <td th:text="${personal.job}">Mitarbeiter</td>
+                    <td>
+                    	<form th:if="${personal.job != 'boss'}" sec:authorize="hasRole('BOSS')" th:method="post" th:action="@{/personal/{id}(id=${personal.id})}" th:attr="data-personal-id=${personal.id}">
+							<button type="submit" th:text="#{personal.delete}" class="ui button" onclick="if(!(confirm('Sind sie sicher, dass sie diesen Mitarbeiter entfernen wollen?'))) return false">x</button>
+						</form>
+                        <button th:if="${personal.job == 'boss'}" type="submit" th:text="#{personal.delete}" class="ui button"
+                                onclick="alert('Ein Boss kann nicht gelöscht werden.')">x</button>
+					</td>
+                </tr>
+                </tbody>
+            </table>
+            </br>
+        </section>
+    </body>
+</html>

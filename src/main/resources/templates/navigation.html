@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+<nav th:fragment="navigation">
+    <div class="navigation">
+        <a class="item" href="verifikation.html" th:href="@{/verifikation}" sec:authorize="hasAnyRole('BOSS', 'MITARBEITER')"
+           th:text="#{nav.verifikation}">Kunde verifizieren</a>
+        <a class="item" href="register.html" th:href="@{/register}" sec:authorize="hasAnyRole('BOSS', 'MITARBEITER')"
+           th:text="#{nav.register}">Registrierung</a>
+        <a class="item" href="kundenliste" th:href="@{/kundenliste}" sec:authorize="hasAnyRole('BOSS', 'MITARBEITER')"
+           th:text="#{nav.kundenliste}">Kundenliste</a>
+
+        <a class="item" href="orderView.html" th:href="@{/orderView}"  sec:authorize="hasAnyRole('LIEFERBOTE', 'MITARBEITER', 'BOSS')"
+           th:text="#{nav.orderView}">Bestellübersicht</a>
+        <a class="item" href="umsatz.html" th:href="@{/umsatz}" sec:authorize="hasRole('BOSS')"
+           th:text="#{nav.umsatz}">Bestellübersicht</a>
+        <a class="item" href="register_personal.html" th:href="@{/personal/register}" sec:authorize="hasRole('BOSS')"
+           th:text="#{nav.register_personal}">Registrierung</a>
+        <a class="item" href="personal.html" th:href="@{/personal}" sec:authorize="hasRole('BOSS')"
+           th:text="#{nav.personal}">Personalliste</a>
+        <a class="item" href="angebot.html" th:href="@{/angebot}" sec:authorize="hasRole('BOSS')"
+           th:text="#{nav.angebot}">Angebot</a>
+        <a class="item" href="warteliste.html" th:href="@{/warteliste}" sec:authorize="hasAnyRole('BAECKER', 'BOSS')"
+           th:text="#{nav.warteliste}">Warteliste</a>
+        <a class="item" href="ofen_anzahl.html" th:href="@{/ofen_anzahl}" sec:authorize="hasRole('BOSS')"
+           th:text="#{nav.ofen}">Ofen</a>
+        <div class="rightmenu">
+            <a class="item" th:href="@{/login}" sec:authorize="!isAuthenticated()" th:text="#{nav.login}">Login</a>
+            <form class="logbutton" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button type="submit" class="ui button" th:text="#{nav.logout}">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <br/>
+</nav>
+</body>
+</html>
